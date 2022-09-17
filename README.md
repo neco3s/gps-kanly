@@ -5,6 +5,8 @@ https://zenn.dev/ogakuzuko/articles/2250f7c7331106
 
 - 0 issueの作成
 
+`projectの選択 & タスク分解`を行う
+
 - 1 branch作成
 
 `git checkout -b feature/add_header_#1`
