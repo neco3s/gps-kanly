@@ -27,9 +27,11 @@ https://zenn.dev/ogakuzuko/articles/2250f7c7331106
 
 `git pull origin main`
 
-- 7ローカルにある作業ブランチを削除する
+- 7ローカル、リモートにある作業ブランチを削除する
 
-`git branch -d 作業ブランチ名`
+ローカル削除`git branch -d 作業ブランチ名`
+
+リモート削除`git push --delete origin 作業ブランチ名`
 
 - 8 ①〜⑦の繰り返し
 
