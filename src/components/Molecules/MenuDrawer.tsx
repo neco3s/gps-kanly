@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import {
   Drawer,
@@ -10,7 +11,6 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react'
-import Link from 'next/link'
 
 export const MenuDrawer = (props) => {
   const { isOpen, onClose } = props

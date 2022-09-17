@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
   Flex,
@@ -10,8 +12,6 @@ import {
   useDisclosure,
   Drawer,
 } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import Link from 'next/link'
 import { MenuDrawer } from '@/components/Molecules/MenuDrawer'
 
 export const Header = () => {
