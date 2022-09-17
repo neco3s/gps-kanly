@@ -19,7 +19,7 @@ export const Header = () => {
 
   return (
     <>
-      <Flex bg='gray.100' p='4'>
+      <Flex bg='gray.100' shadow='md' p='4' w='full' position='fixed' top='0px' zIndex='100'>
         <Box p='2'>
           <Link href='/'>
             <Heading _hover={{ color: 'gray.400', cursor: 'pointer' }} size='md'>
