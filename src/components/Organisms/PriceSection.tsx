@@ -1,10 +1,10 @@
-import { Divider, Heading, Wrap, WrapItem } from '@chakra-ui/react'
+import { Box, Divider, Heading, Wrap, WrapItem } from '@chakra-ui/react'
 import React from 'react'
 import { PriceCard } from '../Molecules/PriceCard'
 
 export const PriceSection = () => {
   return (
-    <>
+    <Box pb={10}>
       <Heading mt={10} textAlign='center'>
         価格
       </Heading>
@@ -20,6 +20,6 @@ export const PriceSection = () => {
           <PriceCard title='Enterprise' desc='準備中' />
         </WrapItem>
       </Wrap>
-    </>
+    </Box>
   )
 }
