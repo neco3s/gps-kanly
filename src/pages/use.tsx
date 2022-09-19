@@ -1,10 +1,15 @@
 import React from 'react'
 import { BaseLayout } from '@/components/Templates/BaseLayout'
+import { Hero } from '@/components/Molecules/Hero'
+import { UseSection } from '@/components/Organisms/UseSection'
 
 const Use = () => {
   return (
     <>
-      <BaseLayout>use</BaseLayout>
+      <BaseLayout>
+        <Hero />
+        <UseSection />
+      </BaseLayout>
     </>
   )
 }
