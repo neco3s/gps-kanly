@@ -1,5 +1,5 @@
-import { adminState } from '@/globalState/AdminState'
-import Admin from '@/types/Admin'
+import { adminState } from '../globalState/AdminState'
+import Admin from '../types/Admin'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import Router from 'next/router'
@@ -12,7 +12,6 @@ const Map = () => {
       Router.push('/signup')
     }
   }, [admin])
-  console.log(admin)
 
   const handleSignOut = () => {
     setAdmin(null)
