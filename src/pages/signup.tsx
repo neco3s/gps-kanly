@@ -15,7 +15,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import Router from 'next/router'
 import { useSetRecoilState } from 'recoil'
 import Admin from '@/types/Admin'
-import { adminState } from '@/globalState/AdminState'
+import { adminState } from '@/globalState/adminState'
 
 type Inputs = {
   company: string

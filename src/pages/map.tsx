@@ -1,7 +1,7 @@
-import { adminState } from '../globalState/AdminState'
-import Admin from '../types/Admin'
+import { adminState } from '@/globalState/adminState'
+import Admin from '@/types/Admin'
 import React, { useEffect } from 'react'
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import Router from 'next/router'
 import { Button } from '@chakra-ui/react'
 
