@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
+import { LoginSection } from '@/components/Organisms/LoginSection'
 import { BaseLayout } from '@/components/Templates/BaseLayout'
-import { SignUpSection } from '@/components/Organisms/SignUpSection'
-import { Button, Input, FormLabel, Box, Text, Badge } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Box, FormLabel, Input, Text, Badge } from '@chakra-ui/react'
 import {
   getFirestore,
   Firestore,
@@ -17,14 +16,16 @@ import Router from 'next/router'
 import { useSetRecoilState } from 'recoil'
 import Admin from '@/types/Admin'
 import { adminState } from '@/globalState/adminState'
+import Link from 'next/link'
 
 type Inputs = {
   company: string
   email: string
 }
 
-const SignUp = () => {
-  const [error, setError] = useState(null)
+const Login = () => {
+  const [companyError, setcompanyError] = useState(null)
+  const [emailError, setemailError] = useState(null)
   const setAdmin = useSetRecoilState<Admin>(adminState)
   const {
     register,
@@ -34,67 +35,69 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const q = query(collection(db, 'company'), where('companyName', '==', data.company))
     const snapshot = await getDocs(q)
-    if (snapshot.docs.length > 0) {
-      setError('既にその団体名は存在します')
+    if (snapshot.docs.length == 0) {
+      setcompanyError('その団体名は存在しません')
+      return
+    }
+    const adminData: Admin = snapshot.docs[0].data() as Admin
+
+    if (adminData.adminMail != data.email) {
+      setemailError('メールが異なります！')
       return
     }
 
     console.log(data)
-    try {
-      const docRef = await addDoc(collection(db, 'company'), {
-        companyName: data.company.replace(/\s+/g, ''),
-        adminMail: data.email,
-        userList: [],
-      })
-      setAdmin({
-        companyName: data.company.replace(/\s+/g, ''),
-        adminMail: data.email,
-        userList: [],
-      })
-      console.log('Document written with ID: ', docRef.id)
-      Router.push('/map')
-    } catch (e) {
-      console.error('Error adding document: ', e)
-    }
+    setAdmin({
+      companyName: adminData.companyName,
+      adminMail: adminData.adminMail,
+      userList: adminData.userList,
+    })
+    Router.push('/map')
   }
   const db: Firestore = getFirestore()
 
   return (
     <>
       <BaseLayout>
-        <SignUpSection />
+        <LoginSection />
         <Box maxW='600px' borderWidth='1px' borderRadius='lg' p={4} m='auto'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormLabel>団体名</FormLabel>
             <Input {...register('company', { required: '団体名は必須入力です' })} />
             {errors.company && <span>{errors.company.message}</span>}
-            {error && (
-              <span>
-                {error}
-                <br />
-              </span>
-            )}
+            {companyError && <span>{companyError}</span>}
 
             <FormLabel mt={5}>メール</FormLabel>
             <Input {...register('email', { required: true })} />
             {/* errors will return when field validation fails  */}
-            {errors.email && <span>メールは必須入力です</span>}
+            {errors.email && (
+              <span>
+                メールは必須入力です
+                <br />
+              </span>
+            )}
+            {emailError && (
+              <span>
+                {emailError}
+                <br />
+              </span>
+            )}
 
-            <Input mt={8} type='submit' value='登録' />
+            <Input mt={8} type='submit' value='ログイン' />
           </form>
         </Box>
         <Text textAlign='center' m={2}>
-          登録済みの方は
-          <Link href='/login' color='blue'>
+          登録済みでない方は
+          <Link href='/signup' color='blue'>
             <Badge colorScheme='blue' _hover={{ cursor: 'pointer' }}>
-              ログインページ
+              登録ページ
             </Badge>
           </Link>
-          からログインしてください
+          から登録してください
         </Text>
       </BaseLayout>
     </>
   )
 }
 
-export default SignUp
+export default Login
